@@ -8,6 +8,16 @@ var PlayerView = Backbone.View.extend({
   initialize: function() {
   },
 
+  events:{
+    'ended': function(){
+      this.model.ended();
+    },
+
+    'playing': function(){
+      this.model.playing();
+    }
+  },
+
   setSong: function(song){
     this.model = song;
     this.render();
@@ -18,3 +28,9 @@ var PlayerView = Backbone.View.extend({
   }
 
 });
+
+//when you click a song
+//added to queue and start playing
+//if we click another song, it should add to queue
+//but will not interupt the current song.
+//only thing that interupts the current song is when it finishes.

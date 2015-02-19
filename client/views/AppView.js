@@ -9,14 +9,18 @@ var AppView = Backbone.View.extend({
     // change:currentSong - this is Backbone's way of allowing you to filter events to
     // ONLY receive change events for the specific property, 'currentSong'
     this.model.on('change:currentSong', function(model){
-      console.log(model.get('songQueue'));
       this.playerView.setSong(model.get('currentSong'));
     }, this);
 
     this.songQueueView.collection.on('add', function(model){
-      console.log('hi');
       this.songQueueView.updateQueue(model.get('songQueue'));
     }, this);
+
+    this.songQueueView.collection.on('remove', function(model){
+      this.songQueueView.updateQueue(model.get('songQueue'));
+    }, this);
+    //we will need dequeue, listen for a remove from the collection.
+
   },
 
   render: function(){

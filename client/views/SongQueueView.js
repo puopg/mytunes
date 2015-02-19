@@ -9,7 +9,7 @@ var SongQueueView = Backbone.View.extend({
 
   updateQueue: function(){
     // Re-render the queue
-    console.log("hello");
+    this.render();
   },
 
   render: function(){
@@ -17,8 +17,10 @@ var SongQueueView = Backbone.View.extend({
     // see http://api.jquery.com/detach/
     this.$el.children().detach();
 
-    this.$el.html('<div class="queue">Queue</div>').append(
-        //return new SongQueueEntryView({model: song}).render();
+    this.$el.html('<div class="queue" style="border: 2px solid black; padding:15px">Queue').append(
+      this.collection.map(function(song){
+        return new SongQueueEntryView({model: song}).render();
+      })
     );
   }
 
